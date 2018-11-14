@@ -1,0 +1,32 @@
+{
+  "name": "rubin/yii2-crud-actions",
+  "description": "Common CRUD actions for Yii2 backend",
+  "type": "yii2-extension",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "yii2",
+    "crud",
+    "actions",
+    "backend"
+  ],
+  "require": {
+    "php": ">=7.0",
+    "yiisoft/yii2": "~2.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "rubin\\yii2\\crud\\": "src"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "suggest": {
+    "yii2tech/ar-position": "Custom records order setup behavior for ActiveRecord",
+    "yii2tech/ar-softdelete": "Soft delete behavior for ActiveRecord",
+    "yii2tech/ar-variation": "Variation behavior for ActiveRecord"
+  }
+}
