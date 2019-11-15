@@ -1,6 +1,7 @@
 <?php
 namespace rubin\yii2\crud\actions;
 
+use rubin\yii2\crud\traits\FormAjaxValidationTrait;
 use Yii;
 use yii\base\Action;
 
@@ -10,6 +11,8 @@ use yii\base\Action;
  */
 class ModelCreateAction extends Action
 {
+    use FormAjaxValidationTrait;
+
     /** @var yii\db\BaseActiveRecord */
     public $model;
     /** @var string */
@@ -18,6 +21,8 @@ class ModelCreateAction extends Action
     public $redirect = 'view';
     /** @var string */
     public $render = 'create';
+    /** @var bool */
+    public $performAjaxValidation = false;
 
     /**
      * Creates new model.
@@ -26,7 +31,11 @@ class ModelCreateAction extends Action
      */
     public function run()
     {
+        if ($this->performAjaxValidation)
+            $this->performAjaxValidation($this->model);
+
         $post = Yii::$app->request->post();
+
         if ($this->model->load($post) && $this->model->save()) {
             return $this->controller->redirect([$this->redirect, 'id' => $this->model->{$this->key}]);
         } else {

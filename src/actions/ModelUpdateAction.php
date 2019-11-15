@@ -1,6 +1,8 @@
 <?php
+
 namespace rubin\yii2\crud\actions;
 
+use rubin\yii2\crud\traits\FormAjaxValidationTrait;
 use Yii;
 use yii\base\Action;
 
@@ -10,12 +12,16 @@ use yii\base\Action;
  */
 class ModelUpdateAction extends Action
 {
+    use FormAjaxValidationTrait;
+
     /** @var string */
     public $key = 'id';
     /** @var string */
     public $redirect = 'view';
     /** @var string */
     public $render = 'update';
+    /** @var bool */
+    public $performAjaxValidation = false;
 
     /**
      * Updates an existing model.
@@ -27,6 +33,9 @@ class ModelUpdateAction extends Action
     public function run($id)
     {
         $model = $this->controller->findModel($id);
+
+        if ($this->performAjaxValidation)
+            $this->performAjaxValidation($model);
 
         $post = Yii::$app->request->post();
         if ($model->load($post) && $model->save()) {
