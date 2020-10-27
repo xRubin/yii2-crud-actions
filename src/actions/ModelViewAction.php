@@ -21,7 +21,7 @@ class ModelViewAction extends Action
      */
     public function run($id)
     {
-        return $this->controller->render('view', [
+        return $this->controller->render($this->render, [
             'model' => $this->controller->findModel($id),
         ]);
     }
